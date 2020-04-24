@@ -1,7 +1,9 @@
 """
-This modcule has functions associated with analyzing the geometry of a molecule.
+This module has functions associated with analyzing the geometry of a molecule.
 
 It can be run as a script with an xyz file.
+
+created by Croix
 """
 
 # Let's put all of this code into one box
