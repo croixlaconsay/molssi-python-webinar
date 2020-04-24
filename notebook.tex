@@ -1,0 +1,672 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{File\_Parsing}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{File Parsing Lesson}\label{file-parsing-lesson}
+
+    \subsection{Reading in the file}\label{reading-in-the-file}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{ls} \PY{n}{data}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ Volume in drive C is Windows
+ Volume Serial Number is 86FC-03FA
+
+ Directory of C:\textbackslash{}Users\textbackslash{}croix\textbackslash{}Desktop\textbackslash{}cms-workshop\textbackslash{}data
+
+04/03/2020  11:44 AM    <DIR>          .
+04/03/2020  11:44 AM    <DIR>          ..
+04/03/2020  11:34 AM    <DIR>          .ipynb\_checkpoints
+04/03/2020  09:51 AM    <DIR>          \_\_MACOSX
+04/03/2020  09:51 AM           212,934 03\_Prod.mdout
+04/03/2020  09:51 AM               619 benzene.xyz
+04/03/2020  09:51 AM             2,471 buckminsterfullerene.xyz
+04/03/2020  11:22 AM    <DIR>          data
+04/03/2020  09:50 AM           241,959 data.zip
+04/03/2020  09:51 AM           355,359 distance\_data\_headers.csv
+04/03/2020  09:51 AM    <DIR>          outfiles
+04/03/2020  09:51 AM            61,568 sapt.out
+04/03/2020  09:51 AM               155 water.xyz
+               7 File(s)        875,065 bytes
+               6 Dir(s)  96,976,945,152 bytes free
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{ls} \PY{n}{data}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ Volume in drive C is Windows
+ Volume Serial Number is 86FC-03FA
+
+ Directory of C:\textbackslash{}Users\textbackslash{}croix\textbackslash{}Desktop\textbackslash{}cms-workshop\textbackslash{}data
+
+04/03/2020  11:44 AM    <DIR>          .
+04/03/2020  11:44 AM    <DIR>          ..
+04/03/2020  11:34 AM    <DIR>          .ipynb\_checkpoints
+04/03/2020  09:51 AM    <DIR>          \_\_MACOSX
+04/03/2020  09:51 AM           212,934 03\_Prod.mdout
+04/03/2020  09:51 AM               619 benzene.xyz
+04/03/2020  09:51 AM             2,471 buckminsterfullerene.xyz
+04/03/2020  11:22 AM    <DIR>          data
+04/03/2020  09:50 AM           241,959 data.zip
+04/03/2020  09:51 AM           355,359 distance\_data\_headers.csv
+04/03/2020  09:51 AM    <DIR>          outfiles
+04/03/2020  09:51 AM            61,568 sapt.out
+04/03/2020  09:51 AM               155 water.xyz
+               7 File(s)        875,065 bytes
+               6 Dir(s)  96,976,945,152 bytes free
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{pwd}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} 'C:\textbackslash{}\textbackslash{}Users\textbackslash{}\textbackslash{}croix\textbackslash{}\textbackslash{}Desktop\textbackslash{}\textbackslash{}cms-workshop'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{import} \PY{n+nn}{os}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} os is a module. \PYZsq{}import os\PYZsq{} gives you access of to os module}
+        \PY{n}{ethanol\PYZus{}file} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{outfiles}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ethanol.out}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} single quotes for str}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{ethanol\PYZus{}file}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+data\textbackslash{}outfiles\textbackslash{}ethanol.out
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{outfile} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{ethanol\PYZus{}file}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} \PYZsq{}r\PYZsq{} is for reading}
+        \PY{n}{data} \PY{o}{=} \PY{n}{outfile}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} data will hold all of the information from the ethanol\PYZus{}file}
+        \PY{c+c1}{\PYZsh{} readlines is a function that goes the file and saves every line as an element in a list}
+        \PY{n}{outfile}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} you opened a file. you must close it after using it.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Using code you already know, find out how many lines were in the file}
+        \PY{c+c1}{\PYZsh{} Hint: think about how readlines() works!}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{pwd}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 'C:\textbackslash{}\textbackslash{}Users\textbackslash{}\textbackslash{}croix\textbackslash{}\textbackslash{}Desktop\textbackslash{}\textbackslash{}cms-workshop'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{ls}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ Volume in drive C is Windows
+ Volume Serial Number is 86FC-03FA
+
+ Directory of C:\textbackslash{}Users\textbackslash{}croix\textbackslash{}Desktop\textbackslash{}cms-workshop
+
+04/03/2020  12:07 PM    <DIR>          .
+04/03/2020  12:07 PM    <DIR>          ..
+04/03/2020  11:14 AM    <DIR>          .ipynb\_checkpoints
+04/03/2020  11:44 AM    <DIR>          data
+04/03/2020  12:07 PM             8,276 File\_Parsing.ipynb
+04/03/2020  11:11 AM             8,142 Introduction (MolSSI Webinar, Week 1).ipynb
+               2 File(s)         16,418 bytes
+               4 Dir(s)  96,976,941,056 bytes free
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{number\PYZus{}lines} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{number\PYZus{}lines}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+270
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{data}\PY{p}{:}
+             \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final Energy}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{line}\PY{p}{:}
+                 \PY{n}{energy\PYZus{}line} \PY{o}{=} \PY{n}{line}
+                 
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{energy\PYZus{}line}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  @DF-RHF Final Energy:  -154.09130176573018
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} what if we just want the number from the for loop? use \PYZsq{}split\PYZsq{}}
+         \PY{n}{words} \PY{o}{=} \PY{n}{energy\PYZus{}line}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{words}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['@DF-RHF', 'Final', 'Energy:', '-154.09130176573018']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{energy} \PY{o}{=} \PY{n}{words}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{my final energy from the file is:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{energy}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+my final energy from the file is: -154.09130176573018
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n+nb}{type}\PY{p}{(}\PY{n}{energy}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} str
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} but we don\PYZsq{}t want it a string. How do we do that? change the energy to float.}
+         \PY{c+c1}{\PYZsh{} str = float(str)}
+         
+         \PY{n}{energy} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{energy}\PY{p}{)} 
+         \PY{c+c1}{\PYZsh{} want to do it all in one stroke? Do \PYZsq{}casting\PYZsq{}}
+         \PY{n}{energy} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{words}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n+nb}{type}\PY{p}{(}\PY{n}{energy}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} float
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} LOOK UP \PYZsq{}ENUMERATE LOOP\PYZsq{} ONLINE}
+\end{Verbatim}
+
+
+    \subsection{Multiple File Parsing}\label{multiple-file-parsing}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{file\PYZus{}location} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{outfiles}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*.out}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{file\PYZus{}location}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+data\textbackslash{}outfiles\textbackslash{}*.out
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k+kn}{import} \PY{n+nn}{glob} \PY{c+c1}{\PYZsh{} look up \PYZsq{}glob\PYZsq{} module online }
+         \PY{c+c1}{\PYZsh{} glob.glob means go into the library \PYZsq{}glob\PYZsq{} and use function \PYZsq{}glob\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{filenames} \PY{o}{=} \PY{n}{glob}\PY{o}{.}\PY{n}{glob}\PY{p}{(}\PY{n}{file\PYZus{}location}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{filenames}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['data\textbackslash{}\textbackslash{}outfiles\textbackslash{}\textbackslash{}butanol.out', 'data\textbackslash{}\textbackslash{}outfiles\textbackslash{}\textbackslash{}decanol.out', 'data\textbackslash{}\textbackslash{}outfiles\textbackslash{}\textbackslash{}ethanol.out', 'data\textbackslash{}\textbackslash{}outfiles\textbackslash{}\textbackslash{}heptanol.out', 'data\textbackslash{}\textbackslash{}outfiles\textbackslash{}\textbackslash{}hexanol.out', 'data\textbackslash{}\textbackslash{}outfiles\textbackslash{}\textbackslash{}methanol.out', 'data\textbackslash{}\textbackslash{}outfiles\textbackslash{}\textbackslash{}nonanol.out', 'data\textbackslash{}\textbackslash{}outfiles\textbackslash{}\textbackslash{}octanol.out', 'data\textbackslash{}\textbackslash{}outfiles\textbackslash{}\textbackslash{}pentanol.out', 'data\textbackslash{}\textbackslash{}outfiles\textbackslash{}\textbackslash{}propanol.out']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{} this calls for a \PYZsq{}nested\PYZsq{} for loop}
+         
+         \PY{k}{for} \PY{n}{file} \PY{o+ow}{in} \PY{n}{filenames}\PY{p}{:}
+             \PY{n}{outfile} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{file}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{data} \PY{o}{=} \PY{n}{outfile}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+             \PY{n}{outfile}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+             \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{data}\PY{p}{:}
+                 \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final Energy}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{line}\PY{p}{:}
+                     \PY{n}{energy\PYZus{}line} \PY{o}{=} \PY{n}{line}
+                     \PY{n}{words} \PY{o}{=} \PY{n}{energy\PYZus{}line}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
+                     \PY{n}{energy} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{words}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{energy}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+-232.1655798347283
+-466.3836241400086
+-154.09130176573018
+-349.27397687072676
+-310.2385332251633
+-115.04800861868374
+-427.3465180082815
+-388.3110864554743
+-271.20138119895074
+-193.12836249728798
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{first\PYZus{}file} \PY{o}{=} \PY{n}{filenames}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{first\PYZus{}file}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+data\textbackslash{}outfiles\textbackslash{}butanol.out
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{file\PYZus{}name} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{basename}\PY{p}{(}\PY{n}{first\PYZus{}file}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{file\PYZus{}name}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+butanol.out
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{just\PYZus{}file\PYZus{}name} \PY{o}{=} \PY{n}{file\PYZus{}name}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{molecule\PYZus{}name} \PY{o}{=} \PY{n}{just\PYZus{}file\PYZus{}name}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{molecule\PYZus{}name}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+butanol
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{} now that we know how to extract the file name, we will now edit out nest for loop}
+         
+         \PY{k}{for} \PY{n}{file} \PY{o+ow}{in} \PY{n}{filenames}\PY{p}{:}
+             
+             \PY{c+c1}{\PYZsh{} Get molecule name}
+             \PY{n}{file\PYZus{}name} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{basename}\PY{p}{(}\PY{n}{file}\PY{p}{)} 
+             \PY{n}{just\PYZus{}file\PYZus{}name} \PY{o}{=} \PY{n}{file\PYZus{}name}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{molecule\PYZus{}name} \PY{o}{=} \PY{n}{just\PYZus{}file\PYZus{}name}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} Reads data}
+             \PY{n}{outfile} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{file}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{data} \PY{o}{=} \PY{n}{outfile}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+             \PY{n}{outfile}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}Looks through the file}
+             \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{data}\PY{p}{:}
+                 \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final Energy}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{line}\PY{p}{:}
+                     \PY{n}{energy\PYZus{}line} \PY{o}{=} \PY{n}{line}
+                     \PY{n}{words} \PY{o}{=} \PY{n}{energy\PYZus{}line}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
+                     \PY{n}{energy} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{words}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{molecule\PYZus{}name}\PY{p}{,} \PY{n}{energy}\PY{p}{)}
+            
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+butanol -232.1655798347283
+decanol -466.3836241400086
+ethanol -154.09130176573018
+heptanol -349.27397687072676
+hexanol -310.2385332251633
+methanol -115.04800861868374
+nonanol -427.3465180082815
+octanol -388.3110864554743
+pentanol -271.20138119895074
+propanol -193.12836249728798
+
+    \end{Verbatim}
+
+    \subsection{Writing Code to a separate
+File}\label{writing-code-to-a-separate-file}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{} let\PYZsq{}s write the output into an external file}
+         \PY{c+c1}{\PYZsh{} Here\PYZsq{}s how to do it}
+         \PY{c+c1}{\PYZsh{} This opens the file for writing}
+         \PY{n}{datafile} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{energies.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w+}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{file} \PY{o+ow}{in} \PY{n}{filenames}\PY{p}{:}
+             
+             \PY{c+c1}{\PYZsh{} Get molecule name}
+             \PY{n}{file\PYZus{}name} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{basename}\PY{p}{(}\PY{n}{file}\PY{p}{)} 
+             \PY{n}{just\PYZus{}file\PYZus{}name} \PY{o}{=} \PY{n}{file\PYZus{}name}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{molecule\PYZus{}name} \PY{o}{=} \PY{n}{just\PYZus{}file\PYZus{}name}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} Reads data}
+             \PY{n}{outfile} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{file}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{data} \PY{o}{=} \PY{n}{outfile}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+             \PY{n}{outfile}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}Looks through the file}
+             \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{data}\PY{p}{:}
+                 \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final Energy}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{line}\PY{p}{:}
+                     \PY{n}{energy\PYZus{}line} \PY{o}{=} \PY{n}{line}
+                     \PY{n}{words} \PY{o}{=} \PY{n}{energy\PYZus{}line}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
+                     \PY{n}{energy} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{words}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{datafile}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{F}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}molecule\PYZus{}name\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{ }\PY{l+s+si}{\PYZob{}energy\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} datafile.write only prints strings}
+         
+                     \PY{c+c1}{\PYZsh{} we fix it by writing \PYZdq{}F\PYZsq{}\PYZob{}variable1\PYZcb{} \PYZob{}variable2\PYZcb{}\PYZsq{}\PYZdq{}}
+                     \PY{c+c1}{\PYZsh{} \PYZbs{}t \PYZsq{}tabs\PYZsq{} each line and \PYZsq{}\PYZbs{}n makes a new line}
+         \PY{n}{datafile}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
