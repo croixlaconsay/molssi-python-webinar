@@ -1,3 +1,7 @@
+"""
+This script analyzes md.out files and pulls Etot
+"""
+
 
 # coding: utf-8
 
